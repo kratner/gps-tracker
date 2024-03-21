@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
 
-function App() {
+const App: React.FC = () => {
+  const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number } | null>(null);
+
+  useEffect(() => {
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCoordinates({ latitude, longitude });
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+      }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
+  }, []);
+
+  const copyToClipboard = () => {
+    if (coordinates) {
+      const { latitude, longitude } = coordinates;
+      navigator.clipboard.writeText(`${latitude},${longitude}`);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>GPS Tracker</h1>
+      {coordinates ? (
+        <div>
+          <p>Latitude: {coordinates.latitude}</p>
+          <p>Longitude: {coordinates.longitude}</p>
+          <button onClick={copyToClipboard} type='button'>Copy to Clipboard</button>
+        </div>
+      ) : (
+        <p>Fetching coordinates...</p>
+      )}
     </div>
   );
-}
+};
 
 export default App;
