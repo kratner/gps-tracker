@@ -4,13 +4,11 @@ const App: React.FC = () => {
   const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number } | null>(null);
 
   useEffect(() => {
-    const handlePositionChange = (position: GeolocationPosition) => {
-      const { latitude, longitude } = position.coords;
-      setCoordinates({ latitude, longitude });
-    };
-
     const watchId = navigator.geolocation.watchPosition(
-      handlePositionChange,
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCoordinates({ latitude, longitude });
+      },
       (error) => {
         console.error('Error getting location:', error);
       }
@@ -19,7 +17,7 @@ const App: React.FC = () => {
     return () => {
       navigator.geolocation.clearWatch(watchId);
     };
-  }, []);
+  }, []); // Empty dependency array to ensure this effect runs only once
 
   const copyToClipboard = () => {
     if (coordinates) {
