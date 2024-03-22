@@ -4,11 +4,13 @@ const App: React.FC = () => {
   const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number } | null>(null);
 
   useEffect(() => {
+    const handlePositionChange = (position: GeolocationPosition) => {
+      const { latitude, longitude } = position.coords;
+      setCoordinates({ latitude, longitude });
+    };
+
     const watchId = navigator.geolocation.watchPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setCoordinates({ latitude, longitude });
-      },
+      handlePositionChange,
       (error) => {
         console.error('Error getting location:', error);
       }
