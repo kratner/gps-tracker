@@ -15,5 +15,5 @@ Run `npm start`
 
 ## Publish to GitHub Pages
 
-run `npm build && npm deploy`
+run `npm run deploy`
 
