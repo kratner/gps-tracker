@@ -1,0 +1,39 @@
+// dark-theme.scss
+
+// Colors
+$primary-color: #1e1e1e;
+$secondary-color: #282828;
+$text-color: #ffffff;
+$accent-color: #007bff;
+
+// Font
+$body-font: 'Arial', sans-serif;
+
+// Background
+$background-color: $primary-color;
+
+// Button
+$button-background: $accent-color;
+$button-text-color: $text-color;
+
+// Applying styles
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: $body-font;
+}
+
+button {
+  background-color: $button-background;
+  color: $button-text-color;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($button-background, 10%);
+  }
+}
+
+// Add more styles as needed for your dark theme
