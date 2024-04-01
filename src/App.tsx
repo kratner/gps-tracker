@@ -34,7 +34,8 @@ const App: React.FC = () => {
       },
       (error) => {
         console.error('Error getting location:', error);
-      }
+      },
+      {maximumAge: 0}
     );
   };
 
