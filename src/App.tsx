@@ -26,14 +26,27 @@ const App: React.FC = () => {
     }
   };
 
+  const refreshCoordinates = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCoordinates({ latitude, longitude });
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+      }
+    );
+  };
+
   return (
     <div className="App">
       <h1>GPS Tracker</h1>
       {coordinates ? (
-        <div>
+        <div className="container">
           <p>Latitude: {coordinates.latitude}</p>
           <p>Longitude: {coordinates.longitude}</p>
           <button onClick={copyToClipboard} type='button'>Copy to Clipboard</button>
+          <button onClick={refreshCoordinates} type='button'>Refresh</button>
         </div>
       ) : (
         <p>Fetching coordinates...</p>
