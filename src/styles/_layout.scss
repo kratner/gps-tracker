@@ -11,18 +11,17 @@ html {
   }
 
   a.button {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
+    background-color: $button-background;
+    color: $text-color;
+    // border: none;
     border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
     text-decoration: none;
     font-size: 0.8em;
-  }
-
-  a:hover {
-    background-color: #0062cc;
+    &:hover {
+      background-color: darken($button-background, 10%);
+    }
   }
 
   a.button,
@@ -32,7 +31,8 @@ html {
 
   .input {
     margin-top: 0.5em;
-
+    border: 1px $accent-color solid;
+    border-radius: 0.5em;
     input {
       margin: 0.5em;
     }
