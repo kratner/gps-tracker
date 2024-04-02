@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+import {
+	FaExternalLinkAlt,
+	FaClipboard,
+	FaSync,
+	FaMap,
+	FaCopy,
+} from "react-icons/fa";
 
 const App: React.FC = () => {
 	const [coordinates, setCoordinates] = useState<{
@@ -74,14 +81,23 @@ const App: React.FC = () => {
 							href={googleMapsLink}
 							target="_blank"
 							rel="noopener noreferrer"
+							title="Open in Google Maps"
 						>
-							Open in Google Maps
+							<FaMap />
 						</a>
-						<button onClick={copyToClipboard} type="button">
-							Copy to Clipboard
+						<button
+							onClick={copyToClipboard}
+							type="button"
+							title="Copy to Clipboard"
+						>
+							<FaCopy />
 						</button>
-						<button onClick={refreshCoordinates} type="button">
-							Refresh
+						<button
+							onClick={refreshCoordinates}
+							type="button"
+							title="Refresh Coordinates"
+						>
+							<FaSync />
 						</button>
 					</div>
 					<div className="input">
@@ -91,7 +107,9 @@ const App: React.FC = () => {
 								type="number"
 								id="refreshInterval"
 								value={refreshInterval}
-								onChange={(e) => setRefreshInterval(parseInt(e.target.value))}
+								onChange={(e) =>
+									setRefreshInterval(Number.parseInt(e.target.value))
+								}
 							/>
 						</label>
 					</div>
