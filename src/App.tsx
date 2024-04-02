@@ -70,7 +70,7 @@ const App: React.FC = () => {
           <button onClick={refreshCoordinates} type="button">
             Refresh
           </button>
-          <div>
+          <div className='input'>
             <label htmlFor="refreshInterval">
               Refresh Interval (ms):
               <input
