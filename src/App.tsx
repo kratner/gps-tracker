@@ -5,7 +5,7 @@ const App: React.FC = () => {
     latitude: number;
     longitude: number;
   } | null>(null);
-  const [refreshInterval, setRefreshInterval] = useState<number>(5000); // Default refresh interval is 5 seconds
+  const [refreshInterval, setRefreshInterval] = useState<number>(5000);
 
   useEffect(() => {
     const watchId = navigator.geolocation.watchPosition(
@@ -31,7 +31,7 @@ const App: React.FC = () => {
       navigator.geolocation.clearWatch(watchId);
       clearInterval(intervalId);
     };
-  }, [refreshInterval]); // Include refreshInterval in the dependency array
+  }, [refreshInterval]);
 
   const copyToClipboard = () => {
     if (coordinates) {
@@ -57,6 +57,10 @@ const App: React.FC = () => {
     );
   };
 
+  const googleMapsLink = coordinates
+    ? `https://www.google.com/maps/search/?api=1&query=${coordinates.latitude},${coordinates.longitude}`
+    : '';
+
   return (
     <div className="App">
       <h1>GPS Tracker</h1>
@@ -64,6 +68,9 @@ const App: React.FC = () => {
         <div className="container">
           <p>Latitude: {coordinates.latitude}</p>
           <p>Longitude: {coordinates.longitude}</p>
+          <a className='button' href={googleMapsLink} target="_blank" rel="noopener noreferrer">
+            Open in Google Maps
+          </a>
           <button onClick={copyToClipboard} type="button">
             Copy to Clipboard
           </button>
