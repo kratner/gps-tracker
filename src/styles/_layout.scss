@@ -1,7 +1,13 @@
 html {
     text-align: center;
 }
+
 .container {
+    .buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
     a.button {
         background-color: #007bff;
         color: #ffffff;
@@ -12,14 +18,19 @@ html {
         text-decoration: none;
         font-size: .8em;
     }
+
     a:hover {
         background-color: #0062cc;
     }
-    a.button, button {
+
+    a.button,
+    button {
         margin: .5em;
     }
+
     .input {
         margin-top: .5em;
+
         input {
             margin: .5em;
         }
